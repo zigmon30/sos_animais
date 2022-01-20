@@ -6,9 +6,15 @@ from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import logout
 # Create your views here.
+from .models import Animal
+
 @login_required(login_url='/login/')
-def index(request):
-    return render(request, 'index.html')
+
+
+def lista_todos_animais(request):
+    animal = Animal.objects.filter(ativo=True)
+    return render(request, 'lista.html', {'animal':animal})
+
 
 def login_user(request):
     return render(request, 'login.html')
@@ -29,5 +35,5 @@ def submit_login(request):
             login(request, user)
             return redirect('/')
         else:
-            messages.error(request, 'Usuário/Senha inválidos. Favor tentar novamente.')
-    return redirect('/login/#')
+            messages.error(request, 'Usuário ou Senha inválidos. Por favor tente novamente.')
+    return redirect('/login/')
