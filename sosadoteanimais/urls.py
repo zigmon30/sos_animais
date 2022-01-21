@@ -23,6 +23,8 @@ from . import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('animal/todos/', views.lista_todos_animais),
+    path('animal/usuario/', views.lista_usuario_animais),
+    path('animal/detalhe/<id>/', views.detalhe_animal),
     path('login/', views.login_user),
     path('login/submit', views.submit_login),
     path('logout/', views.logout_user),

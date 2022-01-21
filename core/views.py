@@ -10,10 +10,18 @@ from .models import Animal
 
 @login_required(login_url='/login/')
 
-
 def lista_todos_animais(request):
     animal = Animal.objects.filter(ativo=True)
     return render(request, 'lista.html', {'animal':animal})
+
+def lista_usuario_animais(request):
+    animal = Animal.objects.filter(ativo=True, usuario=request.user)
+    return render(request, 'lista.html', {'animal':animal})
+
+def detalhe_animal(request, id):
+    animal = Animal.objects.get(ativo=True, id=id)
+    print(animal.id)
+    return render(request, 'animal.html', {'animal':animal})
 
 
 def login_user(request):
