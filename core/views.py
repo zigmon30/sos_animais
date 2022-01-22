@@ -9,6 +9,29 @@ from django.contrib.auth import logout
 from .models import Animal
 
 @login_required(login_url='/login/')
+def registrar_animal(request):
+    return render(request, 'registro_animais.html')
+
+@login_required(login_url='/login/')
+def delete_animal(request, id):
+    animal = Animal.objects.get(id=id)
+    if animal.usuario == request.user:
+        animal.delete()
+    return redirect('/')
+
+@login_required(login_url='/login/')
+def setar_animal(request):
+    city = request.POST.get('city')
+    email = request.POST.get('email')
+    phone = request.POST.get('phone')
+    description = request.POST.get('description')
+    photo = request.FILES.get('file')
+    user = request.user
+    animal = Animal.objects.create(cidade=city, email=email, telefone=phone, descricao=description,
+                                   foto=photo, usuario=user)
+    url = '/animal/detalhe/{}/'.format(animal.id)
+    return redirect(url)
+
 
 def lista_todos_animais(request):
     animal = Animal.objects.filter(ativo=True)
