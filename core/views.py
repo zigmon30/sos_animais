@@ -10,6 +10,11 @@ from .models import Animal
 
 @login_required(login_url='/login/')
 def registrar_animal(request):
+    animal_id = request.GET.get('id')
+    if animal_id:
+        animal = Animal.objects.get(id=animal_id)
+        if animal.usuario == request.user:
+            return render(request, 'registro_animais.html', {'animal':animal})
     return render(request, 'registro_animais.html')
 
 @login_required(login_url='/login/')
@@ -26,9 +31,21 @@ def setar_animal(request):
     phone = request.POST.get('phone')
     description = request.POST.get('description')
     photo = request.FILES.get('file')
+    animal_id = request.POST.get('animal_id')
     user = request.user
-    animal = Animal.objects.create(cidade=city, email=email, telefone=phone, descricao=description,
-                                   foto=photo, usuario=user)
+    if animal_id:
+        animal = Animal.objects.get(id=animal_id)
+        if user == animal.usuario:
+            animal.email = email
+            animal.telefone = phone
+            animal.cidade= city
+            animal.descricao = description
+            if photo:
+                animal.foto = photo
+            animal.save()
+    else:
+        animal = Animal.objects.create(cidade=city, email=email, telefone=phone, descricao=description,
+                                       foto=photo, usuario=user)
     url = '/animal/detalhe/{}/'.format(animal.id)
     return redirect(url)
 

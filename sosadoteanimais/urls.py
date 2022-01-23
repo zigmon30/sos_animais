@@ -31,7 +31,6 @@ urlpatterns = [
     path('animal/registro/', views.registrar_animal),
     path('animal/registro/submit', views.setar_animal),
     path('animal/deleta/<id>/', views.delete_animal),
-
     path('', RedirectView.as_view(url='animal/todos/'))
 
 ]
