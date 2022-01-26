@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn sos_pet.wsgi --log-file -
+web: gunicorn sosadoteanimais.wsgi --log-file -
