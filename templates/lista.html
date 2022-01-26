@@ -20,9 +20,10 @@
                     <div class="col-sm-12 col-md-6 col-lg-4">
                         <a href="../detalhe/{{ p.id }}">
                             <div class="polaroid">
-                                <img src="{{ p.foto.url }}" alt="Norway" style="width:100%">
+                                <img src="{{ p.foto.url }}"  alt="Norway" style="width:100%">
+                                <p>{{ p.cidade }}</p> <p>{{  p.usuario }}</p>
                                 <div class="container">
-                                    <p>{{ p.cidade }}</p>
+
                                 </div>
                             </div>
                         </a>
