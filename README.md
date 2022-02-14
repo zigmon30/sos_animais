@@ -1,5 +1,9 @@
 https://youtu.be/Y406iOrPQcU              <== apresentação
 
+sosadoteanimais.herokuapp.com                  <== deploy no herokuapp
+
+usuario: douglas          senha:Spring56@@     usuario e senha para teste
+
 
 Projeto aplicação para adoção de animais abondonados
 
